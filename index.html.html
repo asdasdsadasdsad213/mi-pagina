@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AulaNova — Panel</title>
+
+  <!-- ICONOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <header class="topbar">
+    <div class="brand">
+      <!-- ICONO NUEVO -->
+      <i class="fa-solid fa-book-open brand-icon"></i>
+
+      <div class="brand-text">
+        <h1>AulaNova</h1>
+        <small>Organiza. Estudia. Avanza.</small>
+      </div>
+    </div>
+
+    <nav class="menu" role="navigation" aria-label="Principal">
+      <button class="menu-btn active" data-section="inicio">Inicio</button>
+      <button class="menu-btn" data-section="agenda">Mi Agenda</button>
+      <button class="menu-btn" data-section="planificador">Planificador</button>
+      <button class="menu-btn" data-section="tareas">Tareas</button>
+      <button class="menu-btn" data-section="habitos">Hábitos</button>
+      <button class="menu-btn" data-section="reportes">Reportes</button>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="container" id="app">
+
+    <!-- INICIO -->
+    <section id="inicio" class="panel active">
+      <div class="hero">
+        <div>
+          <h2>¡Bienvenido de nuevo!</h2>
+          <p class="motivation">“Encuentra tu ritmo: divide, prioriza y avanza un paso a la vez.”</p>
+        </div>
+
+        <div class="hero-cards">
+          <div class="stat-card">
+            <h3 id="card-classes">0</h3>
+            <p>Clases hoy</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="card-study">0h</h3>
+            <p>Estudio acumulado</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="card-tasks">0</h3>
+            <p>Tareas pendientes</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="card">
+          <h3>Próximas actividades</h3>
+          <ul id="upcomingList" class="list"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Resumen rápido</h3>
+          <p id="quickSummary">No hay datos aún — agrega actividades y tareas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section id="agenda" class="panel">
+      <h2>Mi Agenda</h2>
+
+      <div class="card">
+        <form id="agendaForm" class="row">
+          <input type="text" id="agendaTitle" placeholder="Título (ej. Clase de Álgebra)" required />
+          <input type="date" id="agendaDate" required />
+          <input type="time" id="agendaStart" />
+          <input type="time" id="agendaEnd" />
+          <select id="agendaType">
+            <option value="clase">Clase</option>
+            <option value="estudio">Bloque estudio</option>
+            <option value="fisico">Actividad física</option>
+          </select>
+          <button type="submit">Agregar</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Próximos 7 días</h3>
+        <div id="agendaList" class="agenda-list"></div>
+      </div>
+    </section>
+
+    <!-- PLANIFICADOR -->
+    <section id="planificador" class="panel">
+      <h2>Planificador Semanal</h2>
+
+      <div class="planner-grid" id="plannerGrid"></div>
+
+      <div class="card small">
+        <p>Arrastra o añade entradas desde "Mi Agenda".</p>
+      </div>
+    </section>
+
+    <!-- TAREAS -->
+    <section id="tareas" class="panel">
+      <h2>Tareas</h2>
+
+      <div class="card">
+        <div class="row">
+          <input id="newTaskText" placeholder="Nueva tarea (ej. Entregar trabajo)" />
+          <select id="taskPriority">
+            <option value="baja">Baja</option>
+            <option value="media" selected>Media</option>
+            <option value="alta">Alta</option>
+          </select>
+          <button id="addTaskBtn">Agregar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Lista de tareas</h3>
+        <ul id="tasksList" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- HABITOS -->
+    <section id="habitos" class="panel">
+      <h2>Hábitos</h2>
+
+      <div class="card">
+        <p>Marca los hábitos que quieres seguir y registra días completados.</p>
+        <div id="habitsList" class="habits-grid"></div>
+
+        <form id="addHabitForm" class="row small">
+          <input id="habitName" placeholder="Nombre del hábito (ej. 30min lectura)" required />
+          <button type="submit">Añadir hábito</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- REPORTES -->
+    <section id="reportes" class="panel">
+      <h2>Reportes</h2>
+
+      <div class="card">
+        <h3>Resumen semanal</h3>
+        <div class="report-bars">
+          <div><small>Lun</small><div class="bar"><div class="fill" id="r-lun"></div></div></div>
+          <div><small>Mar</small><div class="bar"><div class="fill" id="r-mar"></div></div></div>
+          <div><small>Mié</small><div class="bar"><div class="fill" id="r-mie"></div></div></div>
+          <div><small>Jue</small><div class="bar"><div class="fill" id="r-jue"></div></div></div>
+          <div><small>Vie</small><div class="bar"><div class="fill" id="r-vie"></div></div></div>
+          <div><small>Sáb</small><div class="bar"><div class="fill" id="r-sab"></div></div></div>
+          <div><small>Dom</small><div class="bar"><div class="fill" id="r-dom"></div></div></div>
+        </div>
+        <p id="reportNote">Horas totales: <strong id="totalHours">0h</strong></p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
